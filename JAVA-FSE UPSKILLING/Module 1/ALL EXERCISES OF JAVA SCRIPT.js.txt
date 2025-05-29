@@ -1,0 +1,167 @@
+//Exercise 1
+// main.js
+console.log("Welcome to the Community Hub");
+window.addEventListener("load", () => {
+  alert("Portal loaded successfully!");
+});
+
+//Exercise 2
+const eventName = "Neighborhood Gathering";
+const eventDate = "2025-06-18";
+let remainingSeats = 35;
+console.log(`${eventName} planned on ${eventDate}. Seats open: ${remainingSeats}`);
+remainingSeats--;
+
+//Exercise 3
+const upcomingEvents = [
+  { name: "Karaoke Night", date: "2025-06-25", seats: 15 },
+  { name: "Old Meetup", date: "2024-05-01", seats: 0 }
+];
+upcomingEvents.forEach(ev => {
+  const now = new Date();
+  const evDate = new Date(ev.date);
+  const available = evDate > now && ev.seats > 0;
+  console.log(available ? `Next: ${ev.name}` : `Not eligible: ${ev.name}`);
+});
+
+try {
+  let pick = upcomingEvents[0];
+  if (pick.seats <= 0) throw new Error("Full capacity reached.");
+  pick.seats--;
+  console.log("Enrollment successful.");
+} catch (e) {
+  console.warn("Unable to enroll:", e.message);
+}
+
+//Exercise 4
+function createEvent(title, genre) {
+  return { title, genre };
+}
+function signUpUser(person, ev) {
+  console.log(`${person} joined ${ev.title}`);
+}
+function getEventsByGenre(events, genre) {
+  return events.filter(ev => ev.genre === genre);
+}
+function makeGenreCounter() {
+  let total = 0;
+  return () => ++total;
+}
+const countMusic = makeGenreCounter();
+console.log(countMusic());
+console.log(countMusic());
+
+//exercise 5
+function Program(title, capacity) {
+  this.title = title;
+  this.capacity = capacity;
+}
+Program.prototype.isAvailable = function () {
+  return this.capacity > 0;
+};
+const chillEvent = new Program("Blues Bash", 12);
+console.log(Object.entries(chillEvent));
+console.log(chillEvent.isAvailable());
+
+//Exercise 6
+let eventCatalog = [
+  { name: "Meditation", type: "wellness" },
+  { name: "HipHop Show", type: "music" }
+];
+eventCatalog.push({ name: "Indie Session", type: "music" });
+let onlyMusic = eventCatalog.filter(ev => ev.type === "music");
+let printCards = eventCatalog.map(ev => `Event: ${ev.name.toUpperCase()}`);
+console.log(printCards);
+
+//Exercise 7
+const eventListDiv = document.getElementById("eventList");
+function showEventCard(ev) {
+  const card = document.createElement("section");
+  card.className = "eventTile";
+  card.textContent = `${ev.name} happening on ${ev.date}`;
+  eventListDiv.appendChild(card);
+}
+
+//Exercise 8
+document.getElementById("registerBtn").addEventListener("click", () => {
+  alert("You’ve been added!");
+});
+document.getElementById("categoryFilter").addEventListener("change", e => {
+  filterByCategory(e.target.value);
+});
+document.getElementById("searchInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    console.log("Querying:", e.target.value);
+  }
+});
+
+//Exercise 9
+fetch("https://mockapi.io/events")
+  .then(resp => resp.json())
+  .then(info => console.log("Event Data:", info))
+  .catch(err => console.log("Error Fetching:", err));
+
+async function loadEventData() {
+  document.getElementById("loading").style.visibility = "visible";
+  try {
+    const result = await fetch("https://mockapi.io/events");
+    const list = await result.json();
+    console.log(list);
+  } catch (err) {
+    console.error("Fetch failed", err);
+  } finally {
+    document.getElementById("loading").style.visibility = "hidden";
+  }
+}
+
+//Exercise 10
+const listedEvents = [
+  { name: "Stretch Hour", date: "2025-07-05", category: "fitness" }
+];
+function showDetails({ name, date }) {
+  console.log(`${name} scheduled on ${date}`);
+}
+const backupList = [...listedEvents];
+showDetails(listedEvents[0]);
+
+//Exercise 11
+document.getElementById("regForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const { name, email, event } = e.target.elements;
+  if (!name.value || !email.value) {
+    document.getElementById("errorMsg").textContent = "Please fill out all fields.";
+    return;
+  }
+  console.log(`${name.value} signed up for ${event.value}`);
+});
+
+//Exercise 12
+function postRegistration(info) {
+  const statusEl = document.getElementById("status");
+  statusEl.textContent = "Processing...";
+  setTimeout(() => {
+    fetch("https://mockapi.io/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(info)
+    })
+      .then(resp => resp.json())
+      .then(() => statusEl.textContent = "Success!")
+      .catch(() => statusEl.textContent = "Error occurred.");
+  }, 2000);
+}
+
+//Exercise 13
+console.log("Handling registration...");
+try {
+  const user = { name: "Sam", email: "sam@mail.com" };
+  console.log("Sending:", user);
+} catch (ex) {
+  console.error("Caught exception:", ex);
+}
+
+//Exercise 14
+$("#registerBtn").on("click", function () {
+  alert("Registration button hit!");
+  $(".eventTile").slideUp().slideDown();
+});

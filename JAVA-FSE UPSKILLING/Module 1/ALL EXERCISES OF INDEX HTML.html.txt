@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Event Portal</title>
+  <style>
+    /* Basic styles for layout */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #3498db;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    /* Basic style for navigation links */
+    nav {
+      background-color: #2980b9;
+      overflow: hidden;
+    }
+
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #1abc9c;
+    }
+
+    /* Styling for sections */
+    section {
+      padding: 20px;
+      margin: 10px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Gallery Image Styling */
+    img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    /* Feedback Section */
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <h1>Community Event Portal</h1>
+    <p>Your one-stop platform to explore and create events!</p>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Create Event</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#preferences">Preferences</a>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home">
+    <h2>Welcome to the Community Event Portal</h2>
+    <p>Get involved in community events and contribute to positive change!</p>
+  </section>
+
+  <!-- Event Creation Form -->
+  <section id="events">
+    <h2>Create a New Event</h2>
+    <form id="eventForm">
+      <!-- Event name input field -->
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" placeholder="Enter the event name" required>
+
+      <!-- Event date input field -->
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" required>
+
+      <!-- Event type dropdown -->
+      <label for="eventType">Event Type:</label>
+      <select id="eventType" required>
+        <option value="">Select Type</option>
+        <option value="Sports">Sports</option>
+        <option value="Concert">Concert</option>
+        <option value="Workshop">Workshop</option>
+      </select>
+
+      <!-- Event description textarea -->
+      <label for="eventDescription">Event Description:</label>
+      <textarea id="eventDescription" rows="4" placeholder="Enter a description"></textarea>
+
+      <!-- Submit button -->
+      <button type="submit">Submit Event</button>
+    </form>
+  </section>
+
+  <script>
+    // Event form submission functionality
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const eventName = document.getElementById('eventName').value;
+      alert(`Event "${eventName}" has been created successfully!`);
+    });
+  </script>
+
+  <!-- Event Gallery -->
+  <section id="gallery">
+    <h2>Event Gallery</h2>
+    <div>
+      <img src="event1.jpg" alt="Event Image 1" onmouseover="hoverEffect(this)" onmouseout="resetEffect(this)">
+      <img src="event2.jpg" alt="Event Image 2" onmouseover="hoverEffect(this)" onmouseout="resetEffect(this)">
+      <img src="event3.jpg" alt="Event Image 3" onmouseover="hoverEffect(this)" onmouseout="resetEffect(this)">
+    </div>
+  </section>
+
+  <script>
+    // Hover effect for images
+    function hoverEffect(image) {
+      image.style.transform = 'scale(1.1)';
+      image.style.transition = 'all 0.3s ease';
+    }
+
+    function resetEffect(image) {
+      image.style.transform = 'scale(1)';
+    }
+  </script>
+
+  <!-- Feedback Form -->
+  <section id="feedback">
+    <h2>Submit Your Feedback</h2>
+    <form id="feedbackForm">
+      <label for="userPhone">Your Phone Number:</label>
+      <input type="text" id="userPhone" placeholder="Enter phone number (10 digits)" maxlength="10" required>
+
+      <label for="userFeedback">Your Feedback:</label>
+      <textarea id="userFeedback" rows="4" placeholder="Write your feedback here"></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <script>
+      // Feedback form submission handling
+      document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const phone = document.getElementById('userPhone').value;
+        const feedback = document.getElementById('userFeedback').value;
+        alert(`Feedback submitted: ${feedback}`);
+      });
+    </script>
+  </section>
+
+  <!-- Character Count for Feedback -->
+  <section id="feedback">
+    <h2>Leave Your Feedback</h2>
+    <textarea id="feedbackMessage" onkeyup="countFeedbackChars()" rows="4" placeholder="Your feedback..."></textarea>
+    <p>Character count: <span id="charCount">0</span></p>
+
+    <script>
+      // Count characters while typing feedback
+      function countFeedbackChars() {
+        const feedbackText = document.getElementById('feedbackMessage').value;
+        document.getElementById('charCount').textContent = feedbackText.length;
+      }
+    </script>
+  </section>
+
+  <!-- Event Preferences -->
+  <section id="preferences">
+    <h2>Your Event Preferences</h2>
+    <label for="eventPreference">Preferred Event Type:</label>
+    <select id="eventPreference" onchange="savePreference()">
+      <option value="Sports">Sports</option>
+      <option value="Concert">Concert</option>
+      <option value="Workshop">Workshop</option>
+    </select>
+    <p id="preferencesMessage"></p>
+
+    <script>
+      // Save selected event preference
+      function savePreference() {
+        const selectedEvent = document.getElementById('eventPreference').value;
+        document.getElementById('preferencesMessage').textContent = `You selected ${selectedEvent} as your preferred event.`;
+      }
+    </script>
+  </section>
+
+  <!-- Clear Preferences Button -->
+  <section id="preferences">
+    <h2>Clear Your Preferences</h2>
+    <label for="eventPreference">Select Your Preferred Event:</label>
+    <select id="eventPreference">
+      <option value="Sports">Sports</option>
+      <option value="Music">Music</option>
+      <option value="Art">Art</option>
+    </select>
+    <button onclick="clearPreferences()">Clear Preferences</button>
+
+    <script>
+      // Clear selected event preference
+      function clearPreferences() {
+        document.getElementById('eventPreference').value = '';
+        document.getElementById('preferencesMessage').textContent = 'Preferences cleared.';
+      }
+    </script>
+  </section>
+
+  <!-- Nearby Events Using Geolocation -->
+  <section id="geolocation">
+    <h2>Nearby Events</h2>
+    <button onclick="findNearbyEvents()">Find Nearby Events</button>
+    <p id="geoMessage"></p>
+
+    <script>
+      // Use geolocation to find nearby events (simplified version)
+      function findNearbyEvents() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            document.getElementById('geoMessage').textContent = `Your location: Latitude: ${latitude}, Longitude: ${longitude}. Searching nearby events...`;
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
+    </script>
+  </section>
+
+  <!-- Event Date Validation -->
+  <section id="events">
+    <h2>Submit Your Event</h2>
+    <form id="eventForm">
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" onchange="validateEventDate()" required>
+      <span id="dateError" style="color: red;"></span>
+      <button type="submit">Submit Event</button>
+    </form>
+
+    <script>
+      // Validate the event date
+      function validateEventDate() {
+        const eventDate = document.getElementById('eventDate').value;
+        const today = new Date().toISOString().split('T')[0];
+        if (eventDate < today) {
+          document.getElementById('dateError').textContent = "Event date cannot be in the past.";
+        } else {
+          document.getElementById('dateError').textContent = "";
+        }
+      }
+    </script>
+  </section>
+
+  <!-- Event Gallery with Hover Effect -->
+  <section id="gallery">
+    <h2>Event Gallery</h2>
+    <div>
+      <img src="event1.jpg" alt="Event Image 1" onmouseover="hoverEffect(this)" onmouseout="resetEffect(this)">
+      <img src="event2.jpg" alt="Event Image 2" onmouseover="hoverEffect(this)" onmouseout="resetEffect(this)">
+    </div>
+
+    <script>
+      // Hover effect for images
+      function hoverEffect(image) {
+        image.style.transform = 'scale(1.1)';
+        image.style.transition = 'all 0.3s ease';
+      }
+
+      function resetEffect(image) {
+        image.style.transform = 'scale(1)';
+      }
+    </script>
+  </section>
+
+</body>
+</html>

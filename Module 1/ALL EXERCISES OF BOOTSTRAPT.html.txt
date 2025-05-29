@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Event Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    .side-panel { background-color: #e9ecef; min-height: 100vh; }
+    .card-custom { height: 100%; }
+    .fixed-footer { bottom: 0; width: 100%; position: sticky; background: #212529; color: #fff; }
+  </style>
+</head>
+<body class="bg-white">
+  <!-- Top Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success px-4">
+    <a class="navbar-brand" href="#">EventHub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainMenu">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reach Us</a></li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-1" type="search" placeholder="Find event..." />
+        <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left Filter Panel -->
+      <aside class="col-lg-3 d-none d-lg-block side-panel p-3">
+        <h6 class="mb-3 fw-semibold">Event Types</h6>
+        <div>
+          <input type="checkbox" id="cat1" class="form-check-input">
+          <label for="cat1" class="form-check-label">Concerts</label>
+        </div>
+        <div>
+          <input type="checkbox" id="cat2" class="form-check-input">
+          <label for="cat2" class="form-check-label">Workshops</label>
+        </div>
+      </aside>
+
+      <!-- Main Event Area -->
+      <main class="col-lg-9 p-4">
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-custom shadow-sm">
+              <img src="music.jpg" class="card-img-top" alt="Music Event">
+              <div class="card-body">
+                <h6 class="card-title">Evening Beats</h6>
+                <p class="card-text">Groove with local artists at the open-air stage.</p>
+                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#joinModal">Join</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="card card-custom shadow-sm">
+              <img src="coding.jpg" class="card-img-top" alt="Tech Session">
+              <div class="card-body">
+                <h6 class="card-title">Code Camp</h6>
+                <p class="card-text">Hands-on session on building web projects.</p>
+                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#joinModal">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Join Modal -->
+  <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="joinLabel">Join This Event</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="joinForm">
+            <div class="form-group mb-2">
+              <label for="uname">Your Name</label>
+              <input type="text" class="form-control" id="uname" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="uemail">Email</label>
+              <input type="email" class="form-control" id="uemail" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Confirm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-2 fixed-footer">
+    <small>&copy; 2025 EventHub. Stay connected:
+      <i class="bi bi-whatsapp mx-1"></i>
+      <i class="bi bi-envelope mx-1"></i>
+      <i class="bi bi-telegram mx-1"></i>
+    </small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("joinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thanks for joining!");
+    });
+  </script>
+</body>
+</html>
